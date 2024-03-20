@@ -29,15 +29,12 @@ export class APIRoutes extends CommonRoutesConfig {
     * @desc    Get all users
     * @access  Public
     * ***/
-    this.app.get(`${APP_PREFIX_PATH}/users`, [
-      jwtMiddleware.validJWTNeeded,
-      apiController.getAllUsers
-    ])
+    this.app.get(`${APP_PREFIX_PATH}/users`, apiController.getAllUsers)
 
     /***
     * @router  POST: /api/users/:userId/posts
     * @desc    Create post for a user
-    * @access  Public
+    * @access  Private
     * ***/
     this.app.post("/api/users/:userId/posts", [
       jwtMiddleware.validJWTNeeded,
@@ -49,7 +46,7 @@ export class APIRoutes extends CommonRoutesConfig {
     /***
     * @router  GET: /api/users/:userId/posts
     * @desc    Get all post for a user
-    * @access  Public
+    * @access  Private
     * ***/
     this.app.get(`${APP_PREFIX_PATH}/users/:userId/posts`, [
       jwtMiddleware.validJWTNeeded,
@@ -67,7 +64,7 @@ export class APIRoutes extends CommonRoutesConfig {
     /***
     * @router  POST: /api/posts/:postId/comments
     * @desc    Create post for a comment
-    * @access  Public
+    * @access  Private
     * ***/
     this.app.post(`${APP_PREFIX_PATH}/posts/:postId/comments`, [
       jwtMiddleware.validJWTNeeded,

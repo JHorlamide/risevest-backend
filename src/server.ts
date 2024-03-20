@@ -2,6 +2,7 @@ import http from "http";
 import { app, routes, port } from "./config/app";
 import { CommonRoutesConfig } from "./common/commonRouteConfig";
 import { onError } from "./config/requestLogger";
+import config from "./config/appConfig";
 
 function createServer(): http.Server {
   app.set("port", port);
@@ -29,6 +30,6 @@ export default function main(): http.Server {
   return server;
 }
 
-if (process.env.NODE_ENV !== "test") {
-  main();
-}
+// if (config.node_env !== "development") {
+//   main();
+// }

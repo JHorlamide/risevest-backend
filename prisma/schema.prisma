@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Define the Users table
 model User {
   id      Int      @id @default(autoincrement())
   email   String   @unique
@@ -19,7 +18,6 @@ model User {
   posts   Post[]
 }
 
-// Define the Posts table
 model Post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -30,10 +28,9 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int      // Foreign key to User
   @@index([authorId])
-  comments    Comment[] // Define the relationship between Post and Comment
+  comments    Comment[]
 }
 
-// Define the Comments table
 model Comment {
   id        Int       @id @default(autoincrement())
   content   String
