@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import responseHandler from "../../../common/responseHandler";
+import responseHandler from "../../common/responseHandler";
 import apiService from "../services/service";
 import { User } from "../types/types";
 

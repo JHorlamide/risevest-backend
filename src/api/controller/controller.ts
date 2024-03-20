@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import responseHandler from "../../../common/responseHandler";
-import asyncHandler from "../../../common/middleware/asyncHandler";
+import responseHandler from "../../common/responseHandler";
+import asyncHandler from "../../common/middleware/asyncHandler";
 import apiService from "../services/service"
 
 class APIController {

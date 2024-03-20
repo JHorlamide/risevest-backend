@@ -1,5 +1,5 @@
 import { Application } from "express";
-import { CommonRoutesConfig } from "../../common/commonRouteConfig";
+import { CommonRoutesConfig } from "../common/commonRouteConfig";
 import apiMiddleware from "./middleware/middleware";
 import apiController from "./controller/controller";
 

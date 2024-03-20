@@ -1,4 +1,4 @@
-import { ClientError, ServerError } from "../../../common/exceptions/APIError";
+import { ClientError, ServerError } from "../../common/exceptions/APIError";
 import { userRepository, postRepository, commentRepository } from "../repository/repository";
 import { IUser, IPost, IComment } from "../types/types";
 

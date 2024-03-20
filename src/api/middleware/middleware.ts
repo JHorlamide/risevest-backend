@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import requestBodyValidator from "../../../common/middleware/requestValidation";
+import requestBodyValidator from "../../common/middleware/requestValidation";
 import { userSchema, postSchema, commentSchema } from "../validation/validation.schema";
-import responseHandler from "../../../common/responseHandler";
+import responseHandler from "../../common/responseHandler";
 import apiService from "../services/service"
 
 class APIMiddleware {
