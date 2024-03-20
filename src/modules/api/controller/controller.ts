@@ -39,7 +39,7 @@ class APIController {
   })
 
   getUserPosts = asyncHandler(async (req: Request, res: Response) => {
-    const { userId } = req.params
+    const { userId } = req.params;
     const posts = await apiService.getUserPosts(parseInt(userId));
     responseHandler.successResponse("Post fetched successfully", posts, res);
   })
