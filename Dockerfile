@@ -52,7 +52,7 @@ RUN npm install -g prisma
 RUN npx prisma generate
 
 # Run Prisma migration
-RUN npx prisma migrate deploy --preview-feature
+RUN npx prisma migrate dev --name init
 
 # Build the TypeScript code
 RUN npm run build
