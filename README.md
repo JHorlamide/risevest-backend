@@ -17,6 +17,7 @@ To install this application, follow these steps:
 To start the application use docker compose:
 
 * `docker-compose up --build`
+* In the docker contailer shell for the running make sure to run `npx prisma migrate dev --name init`
 * To test the API endpoints, you can use a tool like [Postman](https://www.postman.com/downloads/) or [curl](https://curl.se/). For example, to create a new resource using `curl`, you can run the following command:
 
   * ```
