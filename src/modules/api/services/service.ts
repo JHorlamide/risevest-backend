@@ -1,4 +1,4 @@
-import { ClientError, ServerError } from "../../common/exceptions/APIError";
+import { ClientError, ServerError } from "../../../common/exceptions/APIError";
 import { userRepository, postRepository, commentRepository } from "../repository/repository";
 import { IUser, IPost, IComment } from "../types/types";
 
@@ -40,7 +40,7 @@ class APIService {
     }
   }
 
-  async topUsersWithLatestComments() {
+  async getTopUsersWithLatestComments() {
     try {
       return await userRepository.getTopUsersWithLatestComments();
     } catch (error: any) {

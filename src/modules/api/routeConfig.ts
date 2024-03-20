@@ -1,7 +1,11 @@
 import { Application } from "express";
-import { CommonRoutesConfig } from "../common/commonRouteConfig";
+import { CommonRoutesConfig } from "../../common/commonRouteConfig";
 import apiMiddleware from "./middleware/middleware";
 import apiController from "./controller/controller";
+import jwtMiddleware from "../auth/middleware/jwtMiddleware";
+import config from "../../config/appConfig";
+
+const APP_PREFIX_PATH = config.prefix;
 
 export class APIRoutes extends CommonRoutesConfig {
   constructor(app: Application) {
@@ -14,7 +18,7 @@ export class APIRoutes extends CommonRoutesConfig {
     * @desc    Create new user
     * @access  Public
     * ***/
-    this.app.post("/api/users", [
+    this.app.post(`${APP_PREFIX_PATH}/users`, [
       apiMiddleware.validateRegUserBody,
       apiMiddleware.validateUserAlreadyExist,
       apiController.createUser
@@ -25,7 +29,10 @@ export class APIRoutes extends CommonRoutesConfig {
     * @desc    Get all users
     * @access  Public
     * ***/
-    this.app.get("/api/users", apiController.getAllUsers)
+    this.app.get(`${APP_PREFIX_PATH}/users`, [
+      jwtMiddleware.validJWTNeeded,
+      apiController.getAllUsers
+    ])
 
     /***
     * @router  POST: /api/users/:userId/posts
@@ -33,6 +40,7 @@ export class APIRoutes extends CommonRoutesConfig {
     * @access  Public
     * ***/
     this.app.post("/api/users/:userId/posts", [
+      jwtMiddleware.validJWTNeeded,
       apiMiddleware.validatePostBody,
       apiMiddleware.validateUserExist,
       apiController.createPost
@@ -43,21 +51,26 @@ export class APIRoutes extends CommonRoutesConfig {
     * @desc    Get all post for a user
     * @access  Public
     * ***/
-    this.app.get("/api/users/:userId/posts", apiController.getUserPosts)
+    this.app.get(`${APP_PREFIX_PATH}/users/:userId/posts`, [
+      jwtMiddleware.validJWTNeeded,
+      apiMiddleware.validateUserExist,
+      apiController.getUserPosts
+    ])
 
     /***
     * @router  GET: /api/users/top-users-with-latest-comments
     * @desc    Get Top users with latest comments
     * @access  Public
     * ***/
-    this.app.get("/api/users/top-users-with-latest-comments", apiController.getUserWithComments)
+    this.app.get(`${APP_PREFIX_PATH}/users/top-users-with-latest-comments`, apiController.getUserWithComments)
 
     /***
     * @router  POST: /api/posts/:postId/comments
     * @desc    Create post for a comment
     * @access  Public
     * ***/
-    this.app.post("/api/posts/:postId/comments", [
+    this.app.post(`${APP_PREFIX_PATH}/posts/:postId/comments`, [
+      jwtMiddleware.validJWTNeeded,
       apiMiddleware.validateCommentsBody,
       apiMiddleware.validatePostExist,
       apiController.createPostComment

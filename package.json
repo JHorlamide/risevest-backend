@@ -13,8 +13,10 @@
   "author": "JHorlamide",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.11.0",
     "argon2": "^0.40.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "helmet": "^6.0.1",
     "http-status": "^1.6.2",

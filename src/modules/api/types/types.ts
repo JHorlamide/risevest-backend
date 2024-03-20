@@ -1,9 +1,10 @@
 export type IUser = {
   name: string;
   email: string;
+  password: string;
 }
 
-export type User = Pick<IUser, "email" | "name"> & {
+export type User = Pick<IUser, "email" | "name" | "password"> & {
   id: number;
 }
 

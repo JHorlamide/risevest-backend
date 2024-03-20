@@ -33,17 +33,11 @@ The API endpoints of this application are described below:
 * `PUT /api/phases/:phaseId/tasks/:taskId:` Mark a task as completed.
 * `PUT /api/phases/:phaseId/tasks/:taskId/reopen:` Reopen a task.
 
-## Solution proposition for reopening a completed task
+## **Query Optimization Task**
 
 To implement the ability to reopen or undo a completed task, we can add a "completed" field to the task object in the phase's tasks array. When a task is completed, the "completed" field is set to true. To reopen or undo a completed task, we can set the "completed" field to false.
 
-To update the "done" field of the phase when a task is reopened, we need to iterate through all the tasks in the phase's tasks array and check the "completed" field of each task. If all tasks are completed, we can set the "done" field of the phase to true. Otherwise, we set it to false. We can then return a success message indicating that the task was reopened successfully.
-
-Here is an example of the API endpoint to reopen a completed task:
-
-```
-PUT /api/phases/c6a753a7/task/d7d0fbf6/reopen
-```
+`SELECT users.id, users.name, posts.title, comments.content FROM users LEFT JOIN posts ON users.id = posts.userId LEFT JOIN (     SELECT comments.postId, MAX(comments.createdAt) AS max_createdAt     FROM comments     GROUP BY comments.postId ) AS latest_comments ON posts.id = latest_comments.postId LEFT JOIN comments ON latest_comments.postId = comments.postId AND latest_comments.max_createdAt = comments.createdAt ORDER BY (SELECT COUNT(posts.id) FROM posts WHERE posts.userId = users.id) DESC LIMIT 3;`
 
 ## Database schema design using MongoDB
 

@@ -4,7 +4,8 @@ import helmet from "helmet";
 
 import { CommonRoutesConfig } from "../common/commonRouteConfig";
 import { requestLogger } from "../config/requestLogger";
-import { APIRoutes } from "../api/routeConfig";
+import { APIRoutes } from "../modules/api/routeConfig";
+import { AuthRoute } from "../modules/auth/routeConfig";
 import config from "./appConfig";
 import { errorHandler, routeNotFoundErrorHandler } from "../common/middleware/errorHandler";
 
@@ -35,6 +36,7 @@ if (config.node_env !== "test") {
 
 // routes definition
 routes.push(new APIRoutes(app));
+routes.push(new AuthRoute(app));
 
 // Global error handing middleware
 app.use(errorHandler);
