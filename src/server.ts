@@ -30,6 +30,6 @@ export default function main(): http.Server {
   return server;
 }
 
-// if (config.node_env !== "development") {
-//   main();
-// }
+if (config.node_env !== "test") {
+  main();
+}
