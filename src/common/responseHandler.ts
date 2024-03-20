@@ -1,5 +1,6 @@
 import { Response } from "express";
-import HttpStatus from "http-status";
+import HttpStatus, { } from "http-status";
+import httpStatus from "http-status";
 
 /**
  * A class for handling HTTP responses with generic data type T.
@@ -18,10 +19,42 @@ class ResponseHandler<T extends object> {
       .json({ status: "Success", message, data })
   }
 
-  public failureResponse(message: string, res: Response): Response {
+  public noContentRes(res: Response) {
+    return res.status(httpStatus.NO_CONTENT).json({ status: "Success" });
+  }
+
+  public badRequest(message: string, res: Response): Response {
     return res
       .status(HttpStatus.BAD_REQUEST)
       .json({ status: "Failure", message })
+  }
+
+  public unAuthorizedResponse(message: string, res: Response): Response {
+    return res
+      .status(HttpStatus.UNAUTHORIZED)
+      .json({ status: "Failure", message })
+  }
+
+  public forbiddenResponse(message: string, res: Response): Response {
+    return res
+      .status(HttpStatus.FORBIDDEN)
+      .json({ status: "Failure", message })
+  }
+
+  public serverError(message: string, res: Response): Response {
+    return res
+      .status(HttpStatus.INTERNAL_SERVER_ERROR)
+      .json({ status: httpStatus.INTERNAL_SERVER_ERROR, message })
+  }
+
+  public customResponse(
+    status: number,
+    responsePayload: any,
+    res: Response): Response {
+    return res
+      .status(status)
+      .type("json")
+      .send(JSON.stringify({ ...responsePayload, status: status }))
   }
 }
 

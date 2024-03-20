@@ -8,9 +8,10 @@ services:
     networks:
       - risevest-network
     environment:
-      - POSTGRES_DB
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
+      - POSTGRES_DB=risevest_db
+      - POSTGRES_USER=olamide
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_INITDB_ARGS=--data-checksums
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
@@ -18,14 +19,13 @@ services:
     container_name: app
     build:
       context: .
-      target: production
     restart: unless-stopped
     ports: ["8080:8080"]
     networks:
       - risevest-network
     volumes:
-      - ./app:/app/app:cached
-    env_file: [./env]
+      - ./src:/app/src:cached
+    env_file: [./.env]
     depends_on: ["db"]
 
 networks:
